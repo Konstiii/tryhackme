@@ -1,76 +1,100 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 
-const resp = await useFetch(`/api/admin`)
-console.log('AdminPage', resp.data.value)
+const flag = ref('')
+const setFlag = (newValue: string) => flag.value = newValue
 
-// interface Data {
-//     flag: string
-// }
+fetch()
 
-// interface ErrorBody {
-//     statusMessage: string
-// }
+// MARK: Methods
 
-// const token = ref('')
+async function fetch() {
+    try {
+        const data = await $fetch<{ flag: string }>('/api/admin')
+        setFlag(data.flag)
+    } catch (error) {
+        console.error(error)
+    }
+}
 
-// const errorMessage = ref('')
-// const setErrorMessage = (newValue: string) => errorMessage.value = newValue
-// const clearErrorMessage = () => errorMessage.value = ''
-
-// const flag = ref('')
-// const setFlag = (newValue: string) => flag.value = newValue
-
-// const { req } = useRequestEvent()
-// const { data, error } = await useFetch<Data>('/api/admin', {
-//     headers: {
-//         'authorization': req.headers.authorization
-//     }
-// })
-// console.log(data.value, error.value)
-
-// if (error.value) {
-//     setErrorMessage('Invalid token')
-// } else {
-//     setFlag(data.value.flag)
-    
-// }
-
-// const submit = async () => {
-//     console.log('Submitting:', token.value)
-
-//     const { data, error } = await useFetch<Data, ErrorBody>(`/api/admin`, { headers: {
-//         'Authorization': token.value
-//     }})
-    
-    // if (error.value) {
-    //     setErrorMessage('Invalid token')
-    // } else {
-    //     setFlag(data.value.flag)
-        
-    // }
-// }
-
-// if (resp.error) {
-//     setErrorMessage(resp.error.value as any as string)
-// } else {
-//     setFlag(resp.data.value)
-// }
-
+async function copy() {
+    try {
+        await navigator.clipboard.writeText(flag.value)
+        alert('Copied!')
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 </script>
 
 <template>
-    <div>
+    <div class="container">
+        
+        <div v-if="flag" class="flag-container">
+            <p class="flag">{{ flag }}</p>
+        </div>
 
-        <p>Admin Page</p>
+        <div v-else class="error-container">
+            <IconErrorTriangle/>
+            <p class="title">401 Unauthorized</p>
+            <p class="description">You don't have sufficient privileges to access this page</p>
+        </div>
 
-        <!-- <input type="text" v-model="token"/>
-        <button @click="submit">Submit</button> -->
-        <!-- <p v-if="error">{{ error }}</p>
-        <p v-if="data">{{ data.flag }}</p> -->
     </div>
 </template>
 
 <style lang="scss" scoped>
+
+div.container {
+    height: 100vh;
+    padding: 64px 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    div.flag-container {
+        background-color: var(--bg-secondary);
+        border-radius: 16px;
+
+        // margin: 64px 0;
+        padding: 24px;
+
+        p.flag {
+            font-size: 17px;
+        }
+
+    }
+
+    div.error-container {
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+
+        .icon.error {
+            color: var(--error);
+
+            width: 100px;
+            height: 100px;
+
+            margin-bottom: 32px;
+        }
+
+        p.title {
+            color: var(--text-primary);
+            font-size: 34px;
+            font-weight: bold;
+        }
+
+        p.description {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+    }
+}
 
 </style>

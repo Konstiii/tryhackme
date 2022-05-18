@@ -31,9 +31,9 @@ export default defineEventHandler(async (event) => {
 
     setCookie(event, 'access_token', token, {
         httpOnly: true,
-        secure: true,
-        path: '/api/admin',
-        sameSite: true
+        // secure: !process.dev,
+        path: '/',
+        // sameSite: true
     })
 
     appendHeader(event, 'Content-Type', 'application/json')
