@@ -7,6 +7,8 @@
 <style lang="scss" scoped>
 
 svg {
+    color: inherit;
+    
     path {
         color: inherit;
         fill: currentColor;

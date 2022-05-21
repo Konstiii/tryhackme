@@ -1,38 +1,34 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 
-const emit = defineEmits(['submit'])
+interface Props {
+    error: string
+}
+
+interface Emits {
+    (e: 'submit', username: string, password: string): void
+}
+
+const { error } = defineProps<Props>()
+const emits = defineEmits<Emits>()
 
 const username = ref('')
 const password = ref('')
 
-const submit = () => {
+function submit() {
     // Error handling...
 
-    console.log('Submit', username.value, password.value)
-
-    emit('submit', {
-        username: username.value,
-        password: password.value
-    })
+    emits('submit', username.value, password.value)
 }
-
 </script>
 
 <template>
     <form @submit.prevent>
         <h1>Login</h1>
-        
-        <div class="input-wrapper">
-            <IconUser/>
-            <label for="username">Username</label>
-            <input type="text" placeholder="Your username" v-model="username">
-        </div>
 
-        <div class="input-wrapper">
-            <IconLock/>
-            <label for="password">Password</label>
-            <input type="password" placeholder="Your password" v-model="password">
-        </div>
+        <p v-if="error" class="error">{{ error }}</p>
+        
+        <BaseInput v-model.trim:username="username" label="Username"/>
+        <BaseInput v-model.trim:password="password" label="Password" type="password"/>
 
         <button type="button" @click="submit">Login</button>
     </form>
@@ -53,37 +49,8 @@ form {
     grid-auto-flow: row;
     gap: 32px;
 
-    div.input-wrapper {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-template-rows: auto auto;
-        align-items: center;
-
-        padding: 8px 0;
-        gap: 4px 0;
-        height: 56px;
-
-        border-radius: 8px;
-        background-color: var(--bg-tertiary);
-
-        .icon {
-            margin: 0 12px;
-            width: 16px;
-            height: 16px;
-
-            grid-row: 1 / span 2;
-        }
-
-        label {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        input {
-            background-color: transparent;
-
-            font-size: 15px;
-        }
+    p.error {
+        color: var(--error);
     }
 
     button {

@@ -1,5 +1,5 @@
+import { JwtPayload } from "jsonwebtoken"
 
-export default interface Payload {
-    readonly id: string
+export default interface Payload extends JwtPayload {
     readonly role: 'user' | 'admin'
 }

@@ -1,5 +1,5 @@
 
-import { Database, User } from '@/server/utils/database'
+import { Database, User } from '~~/server/utils/database/service'
 import { randomUUID } from 'crypto'
 
 export default function useAdminDatabase(): Database {
@@ -10,8 +10,8 @@ class AdminDatabase implements Database {
 
     private readonly users: User[] = [{
         id: '1',
-        username: 'admin',
-        password: 'admin',
+        username: 'user',
+        password: 'password123',
         role: 'user'
     }, {
         id: '2',
