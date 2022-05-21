@@ -23,7 +23,7 @@ class UserService {
 
     public async fetchUsers(): Promise<User[]> {
         // /users => only admins (extract admin id)
-        // /admin => only admin itself
+        // /user => logged in as admin
         return []
     }
 
