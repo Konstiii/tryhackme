@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
+    "build:server": "node_modules/nuxt/bin/nuxt.mjs build",
     "dev": "nuxt dev",
     "version": "nuxt --version",
     "generate": "nuxt generate",
