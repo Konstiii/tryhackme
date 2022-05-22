@@ -11,20 +11,26 @@ export default defineNuxtPlugin((/* nuxtApp */) => {
 class UserService {
 
     public async fetchCurrentUser(): Promise<User> {
-        const [user, setUser] = useUser()
-        if (!user.value) {
-            const user = await $fetch<User>('/api/user', {
-                headers: useRequestHeaders(['cookie'])
-            })
-            setUser(user)
-        }
-        return user.value
+        // const [user, setUser] = useUser()
+        // if (!user.value) {
+            try {
+                const user = await $fetch<User>('/api/user', {
+                    headers: useRequestHeaders(['cookie'])
+                })
+                return user
+            } catch (error) {
+                throw error
+                // throwError(error)
+            }
+        //     setUser(user)
+        // }
+        // return user.value
     }
 
     public async fetchUsers(): Promise<User[]> {
-        // /users => only admins (extract admin id)
-        // /user => logged in as admin
-        return []
+        return await $fetch<User[]>('/api/users', {
+            headers: useRequestHeaders(['cookie'])
+        })
     }
 
 }

@@ -7,6 +7,6 @@ export default defineNuxtRouteMiddleware(async () => {
         const user = await $users.fetchCurrentUser()
         // Use user...
     } catch (error) {
-        return navigateTo('/login')
+        throwError(error)
     }
 }) 

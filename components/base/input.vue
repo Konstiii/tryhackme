@@ -26,10 +26,10 @@ function onInputEvent(event: InputEvent) {
 
 div.wrapper {
     position: relative;
-    height: 48px;
+    height: 56px;
 
     background-color: var(--bg-tertiary);
-    border-radius: 8px;
+    border-radius: 12px;
 
     label, input {
         position: absolute;
@@ -37,17 +37,17 @@ div.wrapper {
         top: 0;
         right: 0;
         bottom: 0;
-        padding: 0 12px;
+        padding: 0 16px;
     }
 
     label {
         color: var(--text-secondary);
-        line-height: 48px;
+        line-height: 56px;
         pointer-events: none;
 
-        font-size: 15px;
+        font-size: 17px;
 
-        transition-property: line-height, font-size;
+        transition-property: line-height, font-size, color;
         transition-duration: 200ms;
         transition-timing-function: ease-out;
     }
@@ -55,12 +55,16 @@ div.wrapper {
     input {
         padding-top: 16px;
         background-color: transparent;
-        font-size: 16px;
+        font-size: 17px;
+
+        &:focus + label {
+            color: var(--accent);
+        }
     }
 
     input:is(:focus, :not(:placeholder-shown)) + label {
-        line-height: 24px;
-        font-size: 12px;
+        line-height: 32px;
+        font-size: 11px;
     }
 
 }

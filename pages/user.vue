@@ -6,16 +6,17 @@ definePageMeta({
 })
 
 const { $users } = useNuxtApp()
+
 const user = await $users.fetchCurrentUser()
 
 </script>
 
 <template>
     <div class="page">
-        <img class="profile-image" :src="`https://gravatar.com/avatar/${user.id}?s=400&d=robohash&r=x`">
+        <ProfileImage :id="user.id" size="164"/>
         <p class="fullname">{{ user.firstname }} {{ user.lastname }}</p>
         <p class="username">{{ user.username }}</p>
-        <p class="email">{{ user.emailAddress }}</p>
+        <p v-if="user.flag" class="flag dp3">{{ user.flag }}</p>
     </div>
 </template>
 
@@ -51,9 +52,13 @@ div.page {
         }
     }
 
-    p.email {
+    p.flag {
         margin-top: 24px;
         font-size: 17px;
+
+        padding: 24px;
+        background-color: var(--bg-secondary);
+        border-radius: 16px;
     }
 
 }

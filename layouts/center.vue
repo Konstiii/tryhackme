@@ -23,9 +23,6 @@ div.layout {
     background-repeat: no-repeat;
     background-size: cover;
 
-    display: grid;
-    grid-template-rows: auto 1fr;
-
     &::before {
         content: '';
 
@@ -36,7 +33,7 @@ div.layout {
         bottom: 0;
 
         background-color: var(--bg-primary);
-        opacity: 0.5;
+        opacity: 0.75;
         z-index: -1;
     }
 }

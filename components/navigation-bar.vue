@@ -11,23 +11,21 @@ try {
 }
 
 const loggedIn = computed(() => user.value != null)
-
-// const user = useState('user')
-// const setUser = (newValue) => user.value = newValue
-
-// if (!user) {
-//     const { data: user} = await useFetch('/api/user')
-//     setUser(user.value)
-// }
+const isAdmin = computed(() => loggedIn.value && user.value.role == 'admin')
 
 </script>
 
 <template>
     <nav>
+        <NuxtLink class="navigation" to="/">Home</NuxtLink>
+        <NuxtLink class="navigation" to="/support">Support</NuxtLink>
+        <NuxtLink v-if="isAdmin" class="navigation" to="/users">Users</NuxtLink>
+        <div class="spacer"></div>
         <NuxtLink v-if="loggedIn" class="user" to="/user">
             <p class="fullname">{{ user.firstname }} {{ user.lastname }}</p>
             <p class="username">{{ user.username }}</p>
-            <img :src="`https://gravatar.com/avatar/${user.id}?s=400&d=robohash&r=x`">
+            <ProfileImage :id="user.id"/>
+            <!-- <img :src="`https://gravatar.com/avatar/${user.id}?s=400&d=robohash&r=x`"> -->
         </NuxtLink>
         <NuxtLink v-else class="login" to="/login">
             <IconUser/>
@@ -44,8 +42,55 @@ nav {
 
     border-bottom: 1px solid #FFFFFF20;
 
+    background-color: var(--bg-primary);
+
     display: flex;
-    justify-content: flex-end;
+    gap: 12px;
+
+    div.spacer {
+        flex: 1;
+    }
+
+    a.navigation {
+        position: relative;
+        line-height: 44px;
+        padding: 0 16px;
+
+        text-decoration: none;
+
+        color: var(--text-secondary);
+        font-size: 17px;
+        font-weight: 500;
+
+        transition-property: color;
+        transition-duration: 200ms;
+        transition-timing-function: ease-out;
+
+        &:hover {
+            color: var(--text-primary);
+
+            &::after {
+                left: 0;
+                width: 100%;
+            }
+        }
+
+        &::after {
+            content: '';
+
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+
+            background-color: var(--accent);
+
+            transition-property: left, width;
+            transition-duration: 200ms;
+            transition-timing-function: ease-out;
+        }
+    }
 
     a.user {
         text-align: right;
@@ -74,8 +119,8 @@ nav {
             grid-column: 2 / 3;
             grid-row: 1 / span 2;
 
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
 
             background-color: white;
             border-radius: 100%;

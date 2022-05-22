@@ -14,6 +14,10 @@ export default defineEventHandler(async (event) => {
     const database = useDatabase()
     const user = database.getUserByUsernamdAndPassword(username, password)
 
+
+    console.log(username, password, database.getAllUsers())
+
+
     if (!user) {
         return notFound(event)
     }

@@ -11,12 +11,17 @@ export default defineEventHandler((event) => {
         return unauthorized(event)
     }
     
-    const payload = jwt.decode(accessToken) as Payload
+    try {
+        const payload = jwt.verify(accessToken, 'some_secret') as Payload
 
-    // if (payload.role != 'admin') {
-    //     return unauthorized(event)
-    // }
+        if (!payload.sub) {
+            return unauthorized(event)
+        }
 
-    const database = useDatabase()
-    return database.getUserByID(payload.sub)
+        const database = useDatabase()
+        return database.getUserByID(payload.sub)
+    } catch (error) {
+        console.info(error)
+        return unauthorized(event)
+    }
 })

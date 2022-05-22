@@ -4,7 +4,6 @@ import { randomUUID } from 'crypto'
 
 interface InternalUser extends User {
     password: string
-    flag?: string
 }
 
 export interface Database {
@@ -16,37 +15,51 @@ class DatabaseServiceImpl implements DatabaseService {
 
     private database: Database = {
         users: [{
-            id: '40a73841-3b69-4a76-ad7e-6d8ce71a4d64',
-            username: 'johndoe',
-            password: 'password',
-            emailAddress: 'john.doe@tryhackme.com',
-            firstname: 'John',
-            lastname: 'Doe',
+            id: '1fa99687-5ced-458e-858e-10638b645873',
+            username: 'smemster',
+            password: 'tryhackme',
+            firstname: 'Tom',
+            lastname: 'Riddle',
             role: 'user'
         }, {
-            id: randomUUID(),
-            username: 'masteradmin',
+            id: '9ed35740-3be5-4dea-ad87-d8607c30df60',
+            username: 'TOneXPer',
             password: randomUUID(),
-            emailAddress: 'master.admin@tryhackme.com',
-            firstname: 'Master',
-            lastname: 'Admin',
+            firstname: 'Valerie',
+            lastname: 'Tino',
             role: 'admin',
-            flag: 'THM{some_admin_flag}'
+            flag: 'THM{6bc2a2546f0f413c8c1d23e11904226f}'
+        }, {
+            id: 'THM{de9a9f4938e849869f167b69c79e9c85}',
+            username: 'TlestrOc',
+            password: randomUUID(),
+            firstname: 'Severin',
+            lastname: 'Mega',
+            role: 'user'
         }]
     }
     
-    getUserByID(id: string): User {
+    getUserByID(id: string): Readonly<User> | null {
         const user = this.database.users.find(user => user.id == id)
         delete user?.password
         return user
     }
 
-    getUserByUsernamdAndPassword(username: string, password: string): User {
+    getUserByUsernamdAndPassword(username: string, password: string): Readonly<User> | null {
         const user = this.database.users.find(user => user.username == username && user.password == password)
         delete user?.password
         return user
     }
 
+    getAllUsers(): Readonly<User[]> {
+        const users = this.database.users.map(user => {
+            return {
+                ...user,
+                password: undefined
+            }
+        })
+        return users
+    }
 
 }
 
