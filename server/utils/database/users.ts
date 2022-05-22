@@ -16,25 +16,28 @@ class DatabaseServiceImpl implements DatabaseService {
     private database: Database = {
         users: [{
             id: '1fa99687-5ced-458e-858e-10638b645873',
-            username: 'smemster',
+            username: 'lord_voldemort',
             password: 'tryhackme',
+            avatar: 'https://s3-eu-central-1.amazonaws.com/vodafone-featured/wp-content/uploads/2021/02/19173439/harry-potter-szenen-640x360.jpg',
             firstname: 'Tom',
             lastname: 'Riddle',
             role: 'user'
         }, {
             id: '9ed35740-3be5-4dea-ad87-d8607c30df60',
-            username: 'TOneXPer',
+            username: 'dumbl3d0r3',
             password: randomUUID(),
-            firstname: 'Valerie',
-            lastname: 'Tino',
+            avatar: 'https://assets.cdn.moviepilot.de/files/e2fbdbbc704768d582ebb4ab898ae38165dc39640eb6724312a68db3d7b7/fill/992/477/Albus%20Dumbledore.jpg',
+            firstname: 'Albus', // Percival Wulfric Brian
+            lastname: 'Dumbledore',
             role: 'admin',
             flag: 'THM{6bc2a2546f0f413c8c1d23e11904226f}'
         }, {
             id: 'THM{de9a9f4938e849869f167b69c79e9c85}',
-            username: 'TlestrOc',
+            username: 't4tz3',
             password: randomUUID(),
-            firstname: 'Severin',
-            lastname: 'Mega',
+            avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzFpFufBSF2Xau__7rqlfH4ITVMc46QlC_FQ&usqp=CAU',
+            firstname: 'Sirius',
+            lastname: 'Black',
             role: 'user'
         }]
     }

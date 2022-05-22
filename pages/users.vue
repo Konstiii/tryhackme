@@ -27,6 +27,7 @@ try {
         <table v-else>
             <tbody>
                 <tr>
+                    <th></th>
                     <th>ID</th>
                     <th>Username</th>
                     <th>Firstname</th>
@@ -34,6 +35,7 @@ try {
                     <th>Role</th>
                 </tr>
                 <tr v-for="user in users" :key="user.id">
+                    <td><ProfileImage :user="user" size="48"/></td>
                     <td>{{ user.id }}</td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.firstname }}</td>

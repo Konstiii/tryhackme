@@ -18,13 +18,13 @@ const isAdmin = computed(() => loggedIn.value && user.value.role == 'admin')
 <template>
     <nav>
         <NuxtLink class="navigation" to="/">Home</NuxtLink>
-        <NuxtLink class="navigation" to="/support">Support</NuxtLink>
+        <NuxtLink class="navigation" to="/characters">Characters</NuxtLink>
         <NuxtLink v-if="isAdmin" class="navigation" to="/users">Users</NuxtLink>
         <div class="spacer"></div>
         <NuxtLink v-if="loggedIn" class="user" to="/user">
             <p class="fullname">{{ user.firstname }} {{ user.lastname }}</p>
             <p class="username">{{ user.username }}</p>
-            <ProfileImage :id="user.id"/>
+            <ProfileImage :user="user"/>
             <!-- <img :src="`https://gravatar.com/avatar/${user.id}?s=400&d=robohash&r=x`"> -->
         </NuxtLink>
         <NuxtLink v-else class="login" to="/login">
@@ -37,14 +37,20 @@ const isAdmin = computed(() => loggedIn.value && user.value.role == 'admin')
 <style lang="scss" scoped>
 
 nav {
-    width: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 96px;
     padding: 24px;
 
+    z-index: 100;
     border-bottom: 1px solid #FFFFFF20;
 
-    background-color: var(--bg-primary);
+    background-color: var(--bg-primary-50);
 
     display: flex;
+    align-items: center;
     gap: 12px;
 
     div.spacer {
@@ -131,7 +137,7 @@ nav {
         height: 44px;
         padding: 0 32px 0 28px;
 
-        background-color: white;
+        background-color: var(--accent);
         border-radius: 12px;
 
         font-size: 17px;
@@ -144,8 +150,8 @@ nav {
         gap: 12px;
 
         .icon {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
         }
     }
 }

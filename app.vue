@@ -1,4 +1,7 @@
 <script setup>
+import Particles from 'particles.vue3'
+
+useNuxtApp().vueApp.use(Particles)
 
 useHead({
   link: [

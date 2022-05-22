@@ -14,13 +14,13 @@ div.layout {
     width: 100vw;
     height: 100vh;
 
+    display: grid;
+    grid-template-rows: auto 1fr;
+
     // background: url('@/assets/img/mountains.svg');
     // background-position: center;
     // background-repeat: no-repeat;
     // background-size: cover;
-
-    display: grid;
-    grid-template-rows: auto 1fr;
 
     // &::before {
     //     content: '';

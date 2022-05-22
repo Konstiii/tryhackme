@@ -13,6 +13,7 @@
     "nuxt": "npm:nuxt3@latest"
   },
   "dependencies": {
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "particles.vue3": "^2.0.6"
   }
 }

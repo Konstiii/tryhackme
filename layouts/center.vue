@@ -18,7 +18,7 @@ div.layout {
     align-items: center;
     padding: 64px 24px;
 
-    background: url('@/assets/img/mountains.svg');
+    background: url('@/assets/img/hogwarts.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

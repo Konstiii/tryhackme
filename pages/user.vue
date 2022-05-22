@@ -13,7 +13,7 @@ const user = await $users.fetchCurrentUser()
 
 <template>
     <div class="page">
-        <ProfileImage :id="user.id" size="164"/>
+        <ProfileImage :user="user" size="164"/>
         <p class="fullname">{{ user.firstname }} {{ user.lastname }}</p>
         <p class="username">{{ user.username }}</p>
         <p v-if="user.flag" class="flag dp3">{{ user.flag }}</p>
@@ -23,6 +23,7 @@ const user = await $users.fetchCurrentUser()
 <style lang="scss" scoped>
 
 div.page {
+    height: 100%;
 
     display: flex;
     flex-direction: column;

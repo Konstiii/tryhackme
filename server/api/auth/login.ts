@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
         role: user.role
     }, 'some_secret', {
         subject: user.id,
-        issuer: 'tryhackme',
+        issuer: 'hogwarts',
         expiresIn: '1d'
     })
 
