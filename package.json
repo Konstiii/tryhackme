@@ -6,11 +6,14 @@
     "dev": "nuxt dev",
     "version": "nuxt --version",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.8",
-    "nuxt": "npm:nuxt3@latest"
+    "nuxt": "npm:nuxt3@^3.0.0-rc.3-27550969.a4a3cff",
+    "sass": "^1.52.1",
+    "sass-loader": "^10.2.1"
   },
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
