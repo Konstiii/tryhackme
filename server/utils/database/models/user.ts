@@ -5,7 +5,8 @@ export default interface User {
     avatar?: string
     firstname: string
     lastname: string
-    role: 'user' | 'admin',
+    role: 'muggle' | 'wizard',
+    evil?: boolean
     flag?: string
     // [key: string]: any
 }

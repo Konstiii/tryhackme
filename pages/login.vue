@@ -24,16 +24,6 @@ async function login(username: string, password: string) {
     } catch (error) {
         setErrorMessage('User not found or password incorrect')
     }
-
-    // if (error.value) {
-    //     setErrorMessage('User not found')
-    // } else {
-    //     clearErrorMessage()
-    //     console.log(user.value)
-    //     setUser(user.value)
-    // }
-
-    // await navigateTo('/user')
 }
 
 </script>

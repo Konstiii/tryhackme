@@ -1,7 +1,4 @@
-<script setup>
-import Particles from 'particles.vue3'
-
-useNuxtApp().vueApp.use(Particles)
+<script setup lang="ts">
 
 useHead({
   link: [
@@ -17,10 +14,13 @@ useHead({
   ]
 })
 
+const state = await $fetch<boolean>('/api/morsmordre')
+const [morsmordre] = useMorsmordre(state)
+
 </script>
 
 <template>
-  <div>
+  <div class="app" :morsmorde="morsmordre">
     <NuxtLayout>
       <NuxtPage/>
     </NuxtLayout>
@@ -32,8 +32,20 @@ useHead({
 html, body {
   width: 100%;
   height: 100%;
-  
+
+  background-color: black;
+}
+
+div.app {
+
   background-color: var(--bg-primary);
+
+  &[morsmorde="true"] {
+    background: url('@/assets/img/morsmordre.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }
 
 </style>

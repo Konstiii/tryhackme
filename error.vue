@@ -10,7 +10,7 @@ const error = useError()
         <IconErrorTriangle/>
         <!-- <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_bdnjxekx.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"   controls autoplay></lottie-player> -->
         <h1 class="title">{{ error.statusMessage }}</h1>
-        <p class="description">{{ error }}</p>
+        <p class="description">{{ error.message }}</p>
     </div>
 </template>
 

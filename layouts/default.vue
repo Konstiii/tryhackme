@@ -10,31 +10,13 @@
 div.layout {
     position: relative;
     z-index: 0;
+
+    nav {
+        position: absolute;
+    }
     
     width: 100vw;
     height: 100vh;
-
-    display: grid;
-    grid-template-rows: auto 1fr;
-
-    // background: url('@/assets/img/mountains.svg');
-    // background-position: center;
-    // background-repeat: no-repeat;
-    // background-size: cover;
-
-    // &::before {
-    //     content: '';
-
-    //     position: absolute;
-    //     left: 0;
-    //     top: 0;
-    //     right: 0;
-    //     bottom: 0;
-
-    //     background-color: var(--bg-primary);
-    //     opacity: 0.5;
-    //     z-index: -1;
-    // }
 }
 
 </style>

@@ -27,7 +27,7 @@ export default defineEventHandler((event) => {
         const database = useDatabase()
 
         if (header.alg != 'none') {
-            payload = jwt.verify(accessToken, 'some_secret') as Payload
+            payload = jwt.verify(accessToken, process.env.PREDICTABLE_SECRET) as Payload
         }
         
         if (!payload.sub) {

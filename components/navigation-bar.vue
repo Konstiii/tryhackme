@@ -11,21 +11,40 @@ try {
 }
 
 const loggedIn = computed(() => user.value != null)
-const isAdmin = computed(() => loggedIn.value && user.value.role == 'admin')
+const isAdmin = computed(() => loggedIn.value && user.value.role == 'wizard')
+const isEvilWizard = computed(() => loggedIn.value && user.value.role == 'wizard' && user.value.evil)
+
+const [morsmordre, setMorsmordre] = useMorsmordre()
+
+async function castMorsmordre() {
+    try {
+        const data = await $fetch<{ morsmordre: boolean, flag: string }>('/api/morsmordre', {
+            method: 'PUT',
+            body: {
+                morsmordre: true
+            }
+        })
+        alert(data.flag)
+        setMorsmordre(data.morsmordre)
+        console.log()
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 </script>
 
 <template>
     <nav>
         <NuxtLink class="navigation" to="/">Home</NuxtLink>
-        <NuxtLink class="navigation" to="/characters">Characters</NuxtLink>
-        <NuxtLink v-if="isAdmin" class="navigation" to="/users">Users</NuxtLink>
+        <NuxtLink v-if="isAdmin" class="navigation" to="/wizards">Wizards</NuxtLink>
+        <div class="spacer"></div>
+        <button v-if="isEvilWizard" class="morsmordre" @click="castMorsmordre">Morsmordre</button>
         <div class="spacer"></div>
         <NuxtLink v-if="loggedIn" class="user" to="/user">
             <p class="fullname">{{ user.firstname }} {{ user.lastname }}</p>
             <p class="username">{{ user.username }}</p>
             <ProfileImage :user="user"/>
-            <!-- <img :src="`https://gravatar.com/avatar/${user.id}?s=400&d=robohash&r=x`"> -->
         </NuxtLink>
         <NuxtLink v-else class="login" to="/login">
             <IconUser/>
@@ -41,13 +60,12 @@ nav {
     left: 0;
     top: 0;
     right: 0;
-    height: 96px;
-    padding: 24px;
+    padding: 16px 24px;
 
     z-index: 100;
     border-bottom: 1px solid #FFFFFF20;
 
-    background-color: var(--bg-primary-50);
+    background-color: #00000080;
 
     display: flex;
     align-items: center;
@@ -95,6 +113,15 @@ nav {
             transition-property: left, width;
             transition-duration: 200ms;
             transition-timing-function: ease-out;
+        }
+    }
+
+    button.morsmordre {
+        font-size: 20px;
+
+        &:hover {
+            color: green;
+            text-shadow: green 0 0 24px;
         }
     }
 
