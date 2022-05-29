@@ -57,6 +57,9 @@ div.wrapper {
         background-color: transparent;
         font-size: 17px;
 
+        width: 100%;
+        height: 100%;
+
         &:focus + label {
             color: var(--accent);
         }

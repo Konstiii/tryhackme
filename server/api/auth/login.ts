@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import notFound from '@/server/utils/errors/not-found'
 import useDatabase from '@/server/utils/database/users'
 import { randomUUID } from 'crypto'
+import badRequest from '~~/server/utils/errors/bad-request'
 
 interface Body {
     readonly username: string
@@ -16,7 +17,7 @@ export default defineEventHandler(async (event) => {
     const user = database.getUserByUsernamdAndPassword(username, password)
 
     if (!user) {
-        return notFound(event)
+        return badRequest(event)
     }
 
     const accessToken = jwt.sign({
