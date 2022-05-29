@@ -18,7 +18,7 @@ async function login(username: string, password: string) {
     clearErrorMessage()
 
     try {
-        const user = await $fetch<User>('/api/auth/login', { method: 'post', body: { username, password } })
+        const user = await $fetch<User>('/api/auth/login', { method: 'POST', body: { username, password } })
         setUser(user)
         await navigateTo('/user')
     } catch (error) {
