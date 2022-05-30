@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
 
     const accessToken = jwt.sign({
         role: user.role
-    }, process.env.PREDICTABLE_SECRET, {
+    }, 'horcrux', {
         subject: user.id,
         issuer: 'hogwarts',
         expiresIn: '1d'

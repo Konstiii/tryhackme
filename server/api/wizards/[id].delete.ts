@@ -11,7 +11,7 @@ export default defineEventHandler(event => {
     try {
         // Validate access token...
         const { access_token: accessToken } = useCookies(event)
-        const payload = jwt.verify(accessToken, process.env.PREDICTABLE_SECRET) as Payload
+        const payload = jwt.verify(accessToken, 'horcrux') as Payload
 
         const database = useDatabase()
         const user = database.getUserByID(payload.sub)
